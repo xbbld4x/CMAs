@@ -29,7 +29,7 @@ if (cma.val_dict['as_of_date'] in date_check.index):
     import std_dev
 #    import fixed_income_calcs
     import equity_calcs
-#    import alts
+    import alts
     print('values were same')
 else:
     import data_pull
@@ -37,7 +37,7 @@ else:
     import std_dev
 #    import fixed_income_calcs
     import equity_calcs
-#    import alts
+    import alts
     print('values were different')
 
 # %%
@@ -49,7 +49,7 @@ else:
 # ## US
 
 # %%
-df_final_us = pd.concat([equity_calcs.equity_returns_us])
+df_final_us = pd.concat([equity_calcs.equity_returns_us, alts.alts_returns_us])
 df_final_us = pd.DataFrame(df_final_us)
 
 # Combine Expected Returns with Standard Deviation
@@ -62,14 +62,19 @@ df_final_us['Standard Deviation'] = pd.to_numeric(df_final_us['Standard Deviatio
 
 # Reorder
 equity_us_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_us_name' in k}.values())))
-df_final_us = df_final_us.reindex(index=equity_us_name)
+#fixed_us_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'fixed_us_name' in k}.values())))
+alts_us_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'alts_us_name' in k}.values())))
+
+order_name = equity_us_name + alts_us_name
+
+df_final_us = df_final_us.reindex(index=order_name)
 df_final_us
 
 # %% [markdown]
 # ## NonUS
 
 # %%
-df_final_nonus = pd.concat([equity_calcs.equity_returns_nonus])
+df_final_nonus = pd.concat([equity_calcs.equity_returns_nonus, alts.alts_returns_nonus])
 df_final_nonus = pd.DataFrame(df_final_nonus)
 
 # Combine Expected Returns with Standard Deviation
@@ -82,7 +87,14 @@ df_final_nonus['Standard Deviation'] = pd.to_numeric(df_final_nonus['Standard De
 
 # Reorder
 equity_nonus_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_nonus_name' in k}.values())))
-df_final_nonus = df_final_nonus.reindex(index=equity_nonus_name)
+#fixed_us_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'fixed_us_name' in k}.values())))
+alts_nonus_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'alts_nonus_name' in k}.values())))
+
+order_name_nonus = equity_nonus_name + alts_nonus_name
+df_final_nonus = df_final_nonus.reindex(index=order_name_nonus)
+
 df_final_nonus
+
+# %%
 
 # %%
