@@ -145,9 +145,9 @@ fixed_us_base = {
      'Global Corporate Ex-US':
         ['I16598 Index', 'Global Aggregate Ex-US', 'NonUS', 0.30, 50.0],
      'Emerging Markets Sovereign USD': 
-        ['BSSUTRUU Index', 'Global Aggregate Ex-US', 'EM', 0.85, 50.0],
+        ['BSSUTRUU Index', 'Global Aggregate Ex-US', 'US', 0.85, 50.0],
      'Emerging Markets Corporate USD': 
-        ['BSEKTRUU Index', 'Global Aggregate Ex-US', 'EM', 1.40, 50.0],
+        ['BSEKTRUU Index', 'Global Aggregate Ex-US', 'US', 1.40, 50.0],
      'Emerging Markets Sovereign Local Currency': ['EMLCTRUU Index', 'Global Aggregate Ex-US', 'EM', 0.85, 50.0],
     }
 
@@ -347,10 +347,12 @@ build_layout = [[sg.T('', **bw)],
               [sg.T('', **bw), 
                sg.T('US', **bw), 
                sg.T('Global', **bw), 
+               sg.T('Global ex-US', **bw), 
                sg.T('Emerging', **bw)],       
               [sg.T('Term Premium Adjust (%)', **bw), 
                sg.Combo(values=value_range, default_value=0, **bw, key='us_theme_tp_adjust'),
                sg.Combo(values=value_range, default_value=0, **bw, key='gl_theme_tp_adjust'),
+               sg.Combo(values=value_range, default_value=0.25, **bw, key='gl_exus_theme_tp_adjust'),
                sg.Combo(values=value_range, default_value=0, **bw, key='em_theme_tp_adjust')],
 
               [sg.T('', **bw), 

@@ -489,7 +489,7 @@ fixed_returns_nonus = fixed_returns_nonus.join(beta_returns)
 # # Save Data to Excel
 
 # %%
-with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMA_New\\Data\\bloomberg_data_usd.xlsx') as writer:
+with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMAs\\Data\\bloomberg_data_usd.xlsx') as writer:
     equity_returns.to_excel(writer, sheet_name='equity_returns')
     fixed_returns.to_excel(writer, sheet_name='fixed_returns')
     fixed_yields.to_excel(writer, sheet_name='fixed_yields')
@@ -498,7 +498,7 @@ with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMA_New\\Data\\bloombe
     alts_returns.to_excel(writer, sheet_name='alts_returns')
 
 # %%
-with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMA_New\\Data\\bloomberg_data_nonus.xlsx') as writer:
+with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMAs\\Data\\bloomberg_data_nonus.xlsx') as writer:
     equity_returns_nonus.to_excel(writer, sheet_name='equity_returns')
     fixed_returns_nonus.to_excel(writer, sheet_name='fixed_returns')
     fixed_yields_nonus.to_excel(writer, sheet_name='fixed_yields')
@@ -508,7 +508,7 @@ with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMA_New\\Data\\bloombe
     historical_cross_currencies.to_excel(writer, sheet_name='currencies')
 
 # %%
-with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMA_New\\Data\\term_structure_data.xlsx') as writer:
+with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMAs\\Data\\term_structure_data.xlsx') as writer:
     aa_corp_spread.to_excel(writer, sheet_name='aa_corp_spread')
     fixed_treasury_yld.to_excel(writer, sheet_name='us_treas_yld')
     fixed_treasury_dur.to_excel(writer, sheet_name='us_treas_dur')

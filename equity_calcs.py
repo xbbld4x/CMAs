@@ -15,6 +15,7 @@
 
 # +
 import cma_gui as cma
+import fixed_income_calcs
 import std_dev
 
 import pandas as pd
@@ -53,7 +54,7 @@ def beta_matrix(covariance_matrix, standard_deviations, beta_reference, name_ref
 
 # +
 # Calculate building block asset classes
-cash = 2.60
+cash = fixed_income_calcs.fixed_returns_us['U.S. Treasury Bills']*100
 
 us_equity_return = cma.val_dict['us_inflation'] + cma.val_dict['us_reg'] + cma.val_dict['us_equity_income'] +\
     cma.val_dict['us_equity_val'] + cma.val_dict['us_equity_buyback']
@@ -99,7 +100,7 @@ equity_returns_us = equity_returns_us.loc[:,'Expected Return']
 
 # +
 # Calculate building block asset classes
-cash_nonus = 2.50
+cash_nonus = fixed_income_calcs.fixed_returns_us['U.S. Treasury Bills']*100
 
 us_equity_return = cma.val_dict['us_inflation'] + cma.val_dict['us_equity_income'] + cma.val_dict['us_equity_buyback'] +\
                     cma.val_dict['us_real_gdp'] + cma.val_dict['us_equity_val']
