@@ -93,7 +93,6 @@ df_expected_return_us.loc[df_expected_return_us['Beta Relative To'] == 'U.S. Equ
 # Finalize expected returns
 equity_returns_us = df_expected_return_us.dropna(subset=['Beta Relative To'])
 equity_returns_us = equity_returns_us.loc[:,'Expected Return']
-equity_returns_us
 
 # # NON-USD
 
@@ -101,7 +100,7 @@ equity_returns_us
 
 # +
 # Calculate building block asset classes
-cash_nonus = (fixed_income_calcs.fixed_returns_us['U.S. Treasury Bills'] + cma.val_dict['country_inflation']/100 - cma.val_dict['us_inflation']/100)*100
+cash_nonus = fixed_income_calcs.fixed_returns_us['U.S. Treasury Bills']*100
 
 us_equity_return = cma.val_dict['us_inflation'] + cma.val_dict['us_equity_income'] + cma.val_dict['us_equity_buyback'] +\
                     cma.val_dict['us_real_gdp'] + cma.val_dict['us_equity_val']
@@ -128,7 +127,7 @@ emerging_equity_return = cma.val_dict['us_inflation'] + cma.val_dict['em_equity_
 # Import returns
 df_returns_nonus = pd.read_csv('P:\\Advisory\\Research\\Automation\\CMAs\\Data\\combined_returns_nonus.csv', index_col=0)
 
-df_expected_return_nonus, df_beta_reference_nonus = beta_matrix(std_dev.exp_cov_nonus, std_dev.annual_adj_std_dev_nonus, 'equity_nonus_beta', 'equity_nonus_name') 
+df_expected_return_nonus, df_beta_reference_nonus = beta_matrix(std_dev.exp_cov_nonus, std_dev.annual_adj_std_dev_nonus, 'equity_nonus_beta', 'equity_nonus_name')   
 # -
 
 # ## Equity Returns
@@ -170,4 +169,5 @@ expected_return_equity_nonus_order = df_equity_nonus.columns.tolist()
 
 equity_returns_nonus = equity_returns_nonus.reindex(index=expected_return_equity_nonus_order)
 # -
+
 

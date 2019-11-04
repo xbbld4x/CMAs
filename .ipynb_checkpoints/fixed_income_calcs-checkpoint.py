@@ -433,7 +433,7 @@ annual_returns_us['U.S. TIPS'] += cma.val_dict['us_inflation']/100
 # -
 
 # Expected Return
-fixed_returns_us = ((annual_returns_us + 1).product(axis=0)**(1/10)-1)
+expected_return_fixed_us = ((annual_returns_us + 1).product(axis=0)**(1/10)-1)
 
 
 # ## NON-US CMAs
@@ -478,7 +478,7 @@ annual_returns_nonus = annual_returns(yield_nonus, future_ylds_nonus, future_dur
 
 # +
 # Expected Return
-fixed_returns_nonus = ((annual_returns_nonus + 1).product(axis=0)**(1/10)-1)
+expected_return_fixed_nonus = ((annual_returns_nonus + 1).product(axis=0)**(1/10)-1)
 
 # Income Return
 income_return_nonus = future_ylds_nonus.mean() - impact_nonus
@@ -493,6 +493,11 @@ gl_term = [i for i in gl_term.keys()]
 em_term = {k:v for (k,v) in term_assign_nonus.items() if v=='EM'}
 em_term = [i for i in em_term.keys()]
 
-fixed_returns_nonus.loc[us_term] = fixed_returns_nonus.loc[us_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['us_inflation']/100
-fixed_returns_nonus.loc[gl_term] = fixed_returns_nonus.loc[gl_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['gl_inflation']/100
-fixed_returns_nonus.loc[em_term] = fixed_returns_nonus.loc[em_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['em_inflation']/100
+expected_return_fixed_nonus.loc[us_term] = expected_return_fixed_nonus.loc[us_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['us_inflation']/100
+expected_return_fixed_nonus.loc[gl_term] = expected_return_fixed_nonus.loc[gl_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['gl_inflation']/100
+expected_return_fixed_nonus.loc[em_term] = expected_return_fixed_nonus.loc[em_term] + cma.val_dict['country_inflation']/100 - cma.val_dict['em_inflation']/100
+# -
+expected_return_fixed_nonus
+
+
+

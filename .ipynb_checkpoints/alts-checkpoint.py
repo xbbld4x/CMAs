@@ -104,6 +104,7 @@ alts_returns_us_ir = df_alts_us_ir['Expected Return']*100
 
 # %%
 df_alts_us_no_ir = df_alts_us[df_alts_us['Information Ratio']=='N/A'].copy(deep=True)
+df_alts_us_no_ir
 
 # %%
 df_alts_us_no_ir['Expected Return'] = np.nan
@@ -118,6 +119,7 @@ alts_returns_us_no_ir = df_alts_us_no_ir['Expected Return']
 alts_returns_us = df_alts_us_no_ir['Expected Return']
 
 alts_returns_us = alts_returns_us_ir.append(alts_returns_us_no_ir)
+alts_returns_us
 
 # %% [markdown]
 # # Non USD
@@ -127,9 +129,9 @@ alts_nonus_name = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() 
 alts_nonus_beta =list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'alts_nonus_beta' in k}.values())))
 alts_nonus_ir =list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'alts_nonus_ir' in k}.values())))
 
-df_beta_relative_alts = pd.DataFrame(list(zip(alts_nonus_name, alts_nonus_beta, alts_nonus_ir)), columns =['Asset Class', 'Beta Relative To', 'Information Ratio'])
-
+df_beta_relative_alts = pd.DataFrame(list(zip(alts_nonus_name, alts_nonus_beta, alts_nonus_ir)), columns =['Asset Class', 'Beta Relative To', 'Information Ratio']) 
 df_beta_relative_alts = df_beta_relative_alts.set_index('Asset Class')
+ 
 df_expected_return = equity_calcs.df_beta_reference_nonus.join(df_beta_relative_alts, how='outer')
 
 # Fill beta for alts non local adjusted returns
@@ -175,3 +177,6 @@ df_alts_returns_nonus_ir['Expected Return'] = equity_calcs.cash/100 + (equity_ca
     * df_beta_revert + df_alts_returns_nonus_ir['Information Ratio'] * df_alts_returns_nonus_ir['Residual Risk']
 
 alts_returns_nonus = (df_alts_returns_nonus_ir['Expected Return']*100).round(1)      
+alts_returns_nonus
+
+# %%

@@ -43,10 +43,10 @@ start_date_str = start_date.strftime('%m-%d-%Y')
 # Bloomberg code to pull gross of dividend return values
 data_return = ['DAY_TO_DAY_TOT_RETURN_GROSS_DVDS']
 
-# %% [raw]
-# equity_name_list = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_us_name' in k}.values())))
-# equity_list = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_us_code' in k}.values())))
-# equity_dictionary = dict(zip(equity_list, equity_name_list))
+# %%
+equity_name_list = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_us_name' in k}.values())))
+equity_list = list(filter(None, list({k:v for (k,v) in cma.val_dict.items() if 'equity_us_code' in k}.values())))
+equity_dictionary = dict(zip(equity_list, equity_name_list))
 
 # %%
 equity_returns = blp.bdh(tickers=equity_list, flds=data_return, start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -283,9 +283,6 @@ fixed_treasury_yld = blp.bdh(tickers=treasury_list, flds='INDEX_YIELD_TO_MATURIT
 fixed_treasury_yld.columns = fixed_treasury_yld.columns.droplevel(1)
 fixed_treasury_yld.columns = fixed_treasury_yld.columns.map(treasury_dictionary)
 
-# Adjust dataframe for varying month end dates
-fixed_treasury_yld = fixed_treasury_yld.resample('M', axis=0).mean()
-
 # %%
 # Treasury Duration
 fixed_treasury_dur = blp.bdh(tickers=treasury_list, flds='INDEX_OAD_TSY', start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -293,9 +290,6 @@ fixed_treasury_dur = blp.bdh(tickers=treasury_list, flds='INDEX_OAD_TSY', start_
 # Rename and reorder columns
 fixed_treasury_dur.columns = fixed_treasury_dur.columns.droplevel(1)
 fixed_treasury_dur.columns = fixed_treasury_dur.columns.map(treasury_dictionary)
-
-# Adjust dataframe for varying month end dates
-fixed_treasury_dur = fixed_treasury_dur.resample('M', axis=0).mean()
 
 # %% [markdown]
 # ## Global Treasury Data
@@ -313,9 +307,6 @@ gl_fixed_treasury_yld = blp.bdh(tickers=gl_treasury_list, flds='INDEX_YIELD_TO_M
 gl_fixed_treasury_yld.columns = gl_fixed_treasury_yld.columns.droplevel(1)
 gl_fixed_treasury_yld.columns = gl_fixed_treasury_yld.columns.map(gl_treasury_dictionary)
 
-# Adjust dataframe for varying month end dates
-gl_fixed_treasury_yld = gl_fixed_treasury_yld.resample('M', axis=0).mean()
-
 # %%
 # Gl Treasury Durations
 gl_fixed_treasury_dur = blp.bdh(tickers=gl_treasury_list, flds='INDEX_OAD_TSY', start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -323,9 +314,6 @@ gl_fixed_treasury_dur = blp.bdh(tickers=gl_treasury_list, flds='INDEX_OAD_TSY', 
 # Rename and reorder columns
 gl_fixed_treasury_dur.columns = gl_fixed_treasury_dur.columns.droplevel(1)
 gl_fixed_treasury_dur.columns = gl_fixed_treasury_dur.columns.map(gl_treasury_dictionary)
-
-# Adjust dataframe for varying month end dates
-gl_fixed_treasury_dur = gl_fixed_treasury_dur.resample('M', axis=0).mean()
 
 # %% [markdown]
 # ## Global Agg Data
@@ -343,9 +331,6 @@ gl_fixed_agg_yld = blp.bdh(tickers=gl_agg_list, flds='INDEX_YIELD_TO_MATURITY', 
 gl_fixed_agg_yld.columns = gl_fixed_agg_yld.columns.droplevel(1)
 gl_fixed_agg_yld.columns = gl_fixed_agg_yld.columns.map(gl_agg_dictionary)
 
-# Adjust dataframe for varying month end dates
-gl_fixed_agg_yld = gl_fixed_agg_yld.resample('M', axis=0).mean()
-
 # %%
 # Gl Treasury Durations
 gl_fixed_agg_dur = blp.bdh(tickers=gl_agg_list, flds='INDEX_OAD_TSY', start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -354,9 +339,6 @@ gl_fixed_agg_dur = blp.bdh(tickers=gl_agg_list, flds='INDEX_OAD_TSY', start_date
 gl_fixed_agg_dur.columns = gl_fixed_agg_dur.columns.droplevel(1)
 gl_fixed_agg_dur.columns = gl_fixed_agg_dur.columns.map(gl_agg_dictionary)
 
-# Adjust dataframe for varying month end dates
-gl_fixed_agg_dur = gl_fixed_agg_dur.resample('M', axis=0).mean()
-
 # %%
 # Gl Treasury Spreads
 gl_fixed_agg_spread = blp.bdh(tickers=gl_agg_list, flds='INDEX_OAS_TSY', start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -364,9 +346,6 @@ gl_fixed_agg_spread = blp.bdh(tickers=gl_agg_list, flds='INDEX_OAS_TSY', start_d
 # Rename and reorder columns
 gl_fixed_agg_spread.columns = gl_fixed_agg_spread.columns.droplevel(1)
 gl_fixed_agg_spread.columns = gl_fixed_agg_spread.columns.map(gl_agg_dictionary)
-
-# Adjust dataframe for varying month end dates
-gl_fixed_agg_spread = gl_fixed_agg_spread.resample('M', axis=0).mean()
 
 # %% [markdown]
 # ## EM Treasury Data
@@ -383,9 +362,6 @@ em_fixed_treasury_yld = blp.bdh(tickers=em_treasury_list, flds='INDEX_YIELD_TO_M
 em_fixed_treasury_yld.columns = em_fixed_treasury_yld.columns.droplevel(1)
 em_fixed_treasury_yld.columns = em_fixed_treasury_yld.columns.map(em_treasury_dictionary)
 
-# Adjust dataframe for varying month end dates
-em_fixed_treasury_yld = em_fixed_treasury_yld.resample('M', axis=0).mean()
-
 # %%
 # Treasury Duration
 em_fixed_treasury_dur = blp.bdh(tickers=em_treasury_list, flds='INDEX_OAD_TSY', start_date=start_date_str, end_date=end_date_str, Per='M')
@@ -393,9 +369,6 @@ em_fixed_treasury_dur = blp.bdh(tickers=em_treasury_list, flds='INDEX_OAD_TSY', 
 # Rename and reorder columns
 em_fixed_treasury_dur.columns = em_fixed_treasury_dur.columns.droplevel(1)
 em_fixed_treasury_dur.columns = em_fixed_treasury_dur.columns.map(em_treasury_dictionary)
-
-# Adjust dataframe for varying month end dates
-em_fixed_treasury_dur = em_fixed_treasury_dur.resample('M', axis=0).mean()
 
 # %% [markdown]
 # ## AA Corp Data (for Muni Calcs)
@@ -546,3 +519,5 @@ with pd.ExcelWriter(r'P:\\Advisory\\Research\\Automation\\CMAs\\Data\\term_struc
     gl_fixed_agg_spread.to_excel(writer, sheet_name='gl_agg_spreads')
     em_fixed_treasury_yld.to_excel(writer, sheet_name='em_treas_yld')
     em_fixed_treasury_dur.to_excel(writer, sheet_name='em_treas_dur')
+
+# %%

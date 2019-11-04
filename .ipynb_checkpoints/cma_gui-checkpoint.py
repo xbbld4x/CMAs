@@ -148,8 +148,7 @@ fixed_us_base = {
         ['BSSUTRUU Index', 'Global Aggregate Ex-US', 'US', 0.85, 50.0],
      'Emerging Markets Corporate USD': 
         ['BSEKTRUU Index', 'Global Aggregate Ex-US', 'US', 1.40, 50.0],
-     'Emerging Markets Sovereign Local Currency': 
-        ['EMLCTRUU Index', 'Global Aggregate Ex-US', 'EM', 0.85, 50.0],
+     'Emerging Markets Sovereign Local Currency': ['EMLCTRUU Index', 'Global Aggregate Ex-US', 'EM', 0.85, 50.0],
     }
 
 # Non USD
@@ -164,8 +163,8 @@ fixed_nonus_base = {
         ['LG30TRUU Index', 'N/A', 'NonUS', 3.50, 40.0],
      'Emerging Markets Local Currency Fixed Income': 
         ['EMLCTRUU Index', 'Emerging Debt Agg USD', 'EM', 0.85, 50.0],
-     'Emerging Markets Sovereign Fixed Income USD': 
-        ['BSSUTRUU Index', 'Emerging Debt Agg USD', 'US', 0.85, 50.0],
+     'Emerging Markets Hard Currency Fixed Income': 
+        ['BEHRTRUU Index', 'Emerging Debt Agg USD', 'US', 0.85, 50.0],
      'Emerging Markets Corporate Fixed Income': 
         ['BSEKTRUU Index', 'Emerging Debt Agg USD', 'US', 1.40, 50.0],
     }
@@ -366,9 +365,13 @@ build_layout = [[sg.T('', **bw)],
                sg.Combo(values=[0,1,2,3,4,5,6,7,8,9,10], default_value=5, **bw, key='em_yield_norm_yrs')],
 
               [sg.T('', **bw), 
-               sg.T('Global', **bw)],      
+               sg.T('US', **bw), 
+               sg.T('Global', **bw), 
+               sg.T('Emerging', **bw)],       
               [sg.T('Yrs to Normal Spreads', **bw), 
-               sg.Combo(values=[0,1,2,3,4,5,6,7,8,9,10], default_value=5, **bw, key='spread_norm_yrs')],
+               sg.Combo(values=[0,1,2,3,4,5,6,7,8,9,10], default_value=5, **bw, key='spread_norm_yrs'),
+               sg.Combo(values=[0,1,2,3,4,5,6,7,8,9,10], default_value=5, **bw, key='gl_spread_norm_yrs'),
+               sg.Combo(values=[0,1,2,3,4,5,6,7,8,9,10], default_value=5, **bw, key='em_spread_norm_yrs')],
               [sg.T('_'*190)]]
 
 
